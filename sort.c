@@ -44,8 +44,6 @@ int main(){
             }
         }
     }
-
-    
     for (k=0; k<n-p; k++){ // asign to the last index the lower number to don't manipulate it 
         
         if (num[k] == x){
