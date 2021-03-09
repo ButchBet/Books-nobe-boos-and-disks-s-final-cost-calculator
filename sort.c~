@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+int main(){
+  int n, c, i, j, k; // number of elements, counter, j, k and i carible for the loops
+  printf("Enter the number of elements: "); scanf("%i", &n);
+  float num[n], comp[1]; // numbers and compare 
+}
