@@ -1,15 +1,17 @@
 #include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 /* The simply call clrscr(). On windows, it will use conio.h's clrscr(), 
-and on linux, It will use Ansi scape codes. */
+and on linux, It will use Ansi scape codes. 
 #ifdef _WIN32
 #include <conio.h>
 #else
 #include <stdio.h>
 //#define clrscr() printf("\033[H\033[J");
 #define clrscr() printf("\e[1;1H\e[2J");
-#endif
+#endif*/
 
 //X and O constant varible
 #define X (char)88
@@ -27,15 +29,15 @@ void setting_position(int inx, char ch);
 //-----------------
 char position_mark[3][3] = {{(char)65, (char)66, (char)67},{(char)68, (char)69, (char)70}, {(char)71, (char)72, (char)73}};
 // Position to mark X or O in each case.
-char *p_mark = &position_mark[0][0]; 
+char *p_mark = &position_mark[0][0]; // position_mark;
 // char *p_mark = &position_mark[0][0];
 
 char names[2][30]; 
 // players name to don't use pi and p2 as reference
 
 char choose[1]={(char)65};
-/* choosing varible to can save, compare and reple it with
-the position_mark array va */
+/* choosing varible to can save, compare and replace it with
+the position_mark array */
 char *p_ch = &choose[0];
 
 bool id  = true; /* Used to can require position to each player and don't
@@ -54,13 +56,14 @@ int saved_verify = 3; // to continue with the reding
 int cp1=0, cp2=0; /*  Verify is there's any 3 match */
 
 int main(void){
-  clrscr();
+  system("cls");
   printf("Wellcome to tiki's game.");
   name_registration();
+  return 0;
 }
 
 // Name registration function
-void name_registration(){
+void name_registration(void){
   printf("\nEnter the players name --> "); scanf("%s %s", &names[0][0], &names[1][0]);
   printf("\n\n");
 
@@ -68,7 +71,7 @@ void name_registration(){
 }
 
 // Drawing board function
-void draw_board(){
+void draw_board(void){
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 3; j++){
       printf("     %c    ", position_mark[i][j]); /*Here we are using 
@@ -108,7 +111,7 @@ int verify(){ // We have to evalueate 8 differetn cases
     cp1 = 0;
     cp2 = 0;/* cp1 and co2 work know that in each line we have mached
 the 3 values */
-    for(int j =0; j < 3; j++){
+    for(int j = 0; j < 3; j++){
       if(position_mark[i][j] == X){
   cp1++;
       }
@@ -147,7 +150,7 @@ the 3 values */
     }
     else if(cp2 == 3){
       saved_verify = 1;
-    }else{ // diagonal cases
+    }else{ // diagonal cases Note: Here you can use another loop to compare the position when the row and column index  are the same
       if(position_mark[0][0] == X && position_mark[1][1] == X && position_mark[2][2] == X || position_mark[0][2] == X && position_mark[1][1] == X && position_mark[2][0] == X){
   saved_verify = 0;
       }
@@ -209,11 +212,11 @@ increment of the loop varieble i */
     continue;
   }
   if(change){
-    break;
+    break; // Here you can change this for i = 3;
   }else{continue;}
       }
       if(change){
-  clrscr(); // clean screen
+        system("cls"); // clean screen
         draw_board(); // draw the board with the new data
   break;
       }
